@@ -15,6 +15,7 @@ import Auth_Modal from "../Auth/Auth_Modal";
 import { useState, useMemo } from "react";
 import ViewTaskDetails from "../../pages/Tasks/ViewTaskDetails";
 import Not_Found from "../../pages/Not_Found/Not_Found";
+import useOAuth from "../Auth/UseOAuth";
 // Navigation configuration
 const NAVIGATION = [
   {
@@ -91,7 +92,7 @@ function Navbar(props) {
       image: "https://avatars.githubusercontent.com/u/19550456",
     },
   });
-
+useOAuth()
   // State to control modal visibility
   const [isModalOpen, setModalOpen] = useState(false);
 
