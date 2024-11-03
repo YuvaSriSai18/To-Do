@@ -26,36 +26,6 @@ export default function GoogleSignIn() {
   const handleSignIn = () => {
     window.location.href = googleLoginUrl();
   };
-
-  // Use useEffect to check for the authorization code in the URL after redirection
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const authCode = urlParams.get("code");
-
-    if (authCode) {
-      // Send the authorization code to the backend for token exchange and user info retrieval
-      fetch("http://localhost:5530/auth/google", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code: authCode }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.token) {
-            // Store the JWT token in localStorage
-            dispatch(setUserData(data.user));
-            localStorage.setItem("accessToken", data.token);
-            console.log("User token:", data.token);
-          } else {
-            console.error("No token received");
-          }
-        })
-        .catch((error) => console.error("Error:", error));
-    }
-  }, []); // Empty dependency array to run only once on mount
-
   return (
     <Box>
       <Button
